@@ -1,0 +1,11 @@
+task:
+  timeout_in: 120m
+  container:
+    image: geopd/builder:update
+    cpu: 8
+    memory: 32G
+  env:
+    DOCKER_PASSWORD: "ENCRYPTED[c25550241f28447fb6350bc59995b116a5ae635c320e1279f2963144e4d1325fcfddcb66b3f8d42f7611bb9ed4cdd2d0]"
+  build_script: docker build . --rm --force-rm --compress --no-cache=true --pull --file Dockerfile -t p404
+  login_script: docker login --username geopd --password $DOCKER_PASSWORD
+  push_script: docker push geopd/builder:p404
